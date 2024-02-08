@@ -1,0 +1,40 @@
+const { gql } = require('graphql-tag');
+
+const recipeSchema = gql`
+type Recipe {
+    id: ID!
+    name: String!
+    image: String!
+    observation: String!
+    ingredients: [Ingredient]!
+}
+
+type Query {
+    getRecipe(id: ID!): Recipe
+    getRecipes(page: Int, pageSize: Int): [Recipe]
+}
+
+input inputRecipe {
+    name: String!
+    image: String
+    observation: String
+}
+
+input inputEditRecipe {
+    name: String
+    image: String
+    observation: String
+}
+
+type Mutation {
+    createRecipe(input: inputRecipe): String
+    editRecipe(id: ID!, input: inputEditRecipe): String
+    deleteRecipe(id: ID!): String
+    associateIngredient(id_recipe: ID!, ids_ingredient: [ID!]): [String]
+}
+
+
+`;
+
+
+module.exports = recipeSchema;

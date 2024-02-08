@@ -1,0 +1,53 @@
+const { gql } = require('graphql-tag');
+
+const ingredientSchema = gql`
+type Ingredient {
+    id: ID!
+    name: String!
+    calories: Float!
+    proteins: Float!
+    total_fat: Float!
+    saturated_fat: Float!
+    trans_fat: Float!
+    total_carbohydrates: Float!
+    sugars: Float!
+    dietary_fiber: Float!
+}
+
+input inputIngredient {
+    name: String!
+    calories: Float!
+    proteins: Float!
+    total_fat: Float!
+    saturated_fat: Float!
+    trans_fat: Float!
+    total_carbohydrates: Float!
+    sugars: Float!
+    dietary_fiber: Float!
+}
+
+input inputEditIngredient {
+    name: String
+    calories: Float
+    proteins: Float
+    total_fat: Float
+    saturated_fat: Float
+    trans_fat: Float
+    total_carbohydrates: Float
+    sugars: Float
+    dietary_fiber: Float
+}
+
+type Query {
+    getIngredient(id: ID!): Ingredient
+    getIngredients(page: Int, pageSize: Int): [Ingredient]
+}
+
+type Mutation {
+    createIngredient(input: inputIngredient!): String
+    editIngredient(id: ID!, input: inputEditIngredient): String
+    deleteIngredient(id: ID!): String
+}
+`;
+
+module.exports = ingredientSchema;
